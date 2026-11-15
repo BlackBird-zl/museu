@@ -19,6 +19,13 @@ img/visita/       Renders e panorâmicas equirretangulares do Museu Municipal
 .nojekyll         Impede o GitHub Pages de processar os ficheiros
 ```
 
+## Identidade
+
+Tipografia **Archivo** (títulos) e **Source Sans 3** (texto), carregadas do Google Fonts.
+A paleta assenta no verde do Município de Aljezur, `#85C569` na identidade oficial,
+escurecido para `#3E8A2B` onde é preciso contraste sobre fundo claro. Os neutros têm
+viés verde em vez de creme. Todos os valores são variáveis CSS no topo de `css/site.css`.
+
 ## Correr localmente
 
 As panorâmicas são carregadas como texturas WebGL, o que exige HTTP: abrir o ficheiro
@@ -35,13 +42,20 @@ Definições do repositório → Pages → Deploy from a branch → `main` / `ro
 
 ## Como funciona a visita
 
-Cada sala tem uma panorâmica equirretangular de 4096×2048 projetada no interior de uma
+`visita.html` abre diretamente no visor, em ecrã cheio, com um cartão de entrada curto
+que se dispensa num toque. O contexto (miniaturas, textos, cronologia) fica por baixo,
+não por cima.
+
+Cada sala tem uma panorâmica equirretangular de 3072×1536 projetada no interior de uma
 esfera, com a câmara ao centro: arrasta-se para girar 360°. As quatro vistas de pormenor
 são renders planos projetados numa calote de 98°, o que dá liberdade de olhar sem mostrar
 as bordas da imagem.
 
 Os pontos sobre as peças são posições em 3D, projetadas no ecrã a cada fotograma. Em
-ecrãs com menos de 820 px carrega-se uma panorâmica de 2048×1024 em vez da de 4K.
+ecrãs com menos de 820 px carrega-se uma panorâmica de 1536×768.
+
+**Desempenho.** O visor só desenha quando há movimento: parado, não consome GPU. A
+resolução de desenho está limitada a 1,5× e o three.js só é carregado em `visita.html`.
 
 Para mudar um ponto de sítio, editar as coordenadas `x` e `y` em `SALAS` dentro de
 `js/visita.js`. São percentagens da imagem: `x` da esquerda, `y` do topo.

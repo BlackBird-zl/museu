@@ -165,7 +165,7 @@ class Pano{
     this.el=el; this.ok=false;
     try{ this.renderer=new THREE.WebGLRenderer({antialias:true,alpha:false}); }catch(e){ return; }
     if(!this.renderer) return;
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.5));
     this.renderer.setClearColor(0x191B18,1);
     if("outputColorSpace" in this.renderer && THREE.SRGBColorSpace)
       this.renderer.outputColorSpace=THREE.SRGBColorSpace;
@@ -178,13 +178,13 @@ class Pano{
     this.lon=0;this.lat=0;this.vx=0;this.vy=0;this.moved=0;
     this.cfg={...DEF}; this.equi=false; this.spots=[]; this.pts=new Map();
     this.tgt=new THREE.Vector3(); this.tmp=new THREE.Vector3(); this.anim=null;
-    this.ok=true; this.bind();
+    this.sujo=true; this.ok=true; this.bind();
     new ResizeObserver(()=>this.size()).observe(el); this.size();
     this.loop=this.loop.bind(this); requestAnimationFrame(this.loop);
   }
   size(){ const w=this.el.clientWidth||1,h=this.el.clientHeight||1;
     this.renderer.setSize(w,h,false); this.cam.aspect=w/h; this.cam.updateProjectionMatrix();
-    if(this.mesh) this.zoom(this.cam.fov); }
+    this.invalida(); if(this.mesh) this.zoom(this.cam.fov); }
   /* num render plano, a abertura não pode exceder a calote projetada */
   fovTeto(){
     if(this.equi) return this.cfg.max;
@@ -201,7 +201,7 @@ class Pano{
     if(this.lat>la){this.lat=la;this.vy=0} if(this.lat<-la){this.lat=-la;this.vy=0}
   }
   zoom(f){ this.cam.fov=Math.max(this.cfg.min,Math.min(this.fovTeto(),f));
-    this.cam.updateProjectionMatrix(); this.clamp(); }
+    this.cam.updateProjectionMatrix(); this.clamp(); this.invalida(); }
   p3(u,v){
     const H=(this.equi?360:this.cfg.h)*D2R, V=(this.equi?180:this.cfg.v)*D2R;
     const phi=(-Math.PI/2-H/2)+u*H, th=(Math.PI/2-V/2)+v*V;
@@ -226,7 +226,7 @@ class Pano{
       this.scene.add(this.mesh);
       this.lon=0;this.lat=0;this.vx=0;this.vy=0; this.zoom(cfg.fov);
       this.pontos(hotspots);
-      this.el.classList.remove("loading"); this.el.classList.add("live");
+      this.el.classList.remove("loading"); this.el.classList.add("live"); this.invalida();
       if(!matchMedia("(prefers-reduced-motion: reduce)").matches){
         const lo=this.equi?22:Math.max(0,(this.cfg.h-this.fovH())/2);
         this.lon=-Math.min(this.equi?16:9,lo); this.deslizar(0,0,this.equi?1900:1500);
@@ -262,18 +262,25 @@ class Pano{
     this.vx=0;this.vy=0;
   }
   deslizar(lon,lat,d){ this.anim={l0:this.lon,a0:this.lat,l1:lon,a1:lat,t0:performance.now(),d,cb:null}; }
+  invalida(){ this.sujo=true; }
   loop(){
     requestAnimationFrame(this.loop);
     if(!this.mesh) return;
+    let mexeu=false;
     if(this.anim){
       const a=this.anim,k=Math.min(1,(performance.now()-a.t0)/a.d);
       const e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
       this.lon=a.l0+(a.l1-a.l0)*e; this.lat=a.a0+(a.a1-a.a0)*e;
       if(k>=1){ this.anim=null; if(a.cb)a.cb(); }
-    } else if(!this.pts.size){
+      mexeu=true;
+    } else if(!this.pts.size && (this.vx||this.vy)){
       this.lon+=this.vx; this.lat+=this.vy; this.vx*=0.9; this.vy*=0.9;
       if(Math.abs(this.vx)<0.002)this.vx=0; if(Math.abs(this.vy)<0.002)this.vy=0;
+      mexeu=true;
     }
+    /* parado e sem nada por redesenhar: não gasta GPU */
+    if(!mexeu && !this.sujo) return;
+    this.sujo=false;
     this.clamp();
     const phi=(90-this.lat)*D2R, th=(this.lon-90)*D2R;
     this.tgt.set(R*Math.sin(phi)*Math.cos(th), R*Math.cos(phi), R*Math.sin(phi)*Math.sin(th));
@@ -298,7 +305,7 @@ class Pano{
       this.moved+=Math.abs(dx)+Math.abs(dy);
       if(this.pts.size>=2){ const d=dist(); if(this.pd>4) this.zoom(this.pf*this.pd/d); return; }
       const k=this.cam.fov/(el.clientHeight||600);
-      this.lon-=dx*k; this.lat+=dy*k; this.vx=-dx*k*0.6; this.vy=dy*k*0.6;
+      this.lon-=dx*k; this.lat+=dy*k; this.vx=-dx*k*0.6; this.vy=dy*k*0.6; this.invalida();
     });
     const up=e=>{ this.pts.delete(e.pointerId); if(!this.pts.size) el.classList.remove("grabbing"); };
     el.addEventListener("pointerup",up); el.addEventListener("pointercancel",up);
@@ -312,9 +319,9 @@ let sala="arqueologico", vista=0, pano=null, arrancou=false;
 
 function tabs(){
   $("vvTabs").innerHTML=ORDEM.map(k=>{
-    const s=SALAS[k];
+    const s=SALAS[k], curto=s.nome.replace(/<br>/g," ").replace("Núcleo ","").replace("Sala do ","");
     return `<button type="button" class="vv-tab${k===sala?" on":""}" data-sala="${k}">
-      <b>${s.n}</b><span>${s.nome.replace(/<br>/g," ")}</span></button>`;
+      <b>${s.n}</b><span>${curto}</span></button>`;
   }).join("");
 }
 function modulo(s){
@@ -361,6 +368,7 @@ function abreSala(k){
   $("vvMod").innerHTML=modulo(s);
   fecha();
   mostraVista(0);
+  if(window.scrollY>40) window.scrollTo({top:0,behavior:"smooth"});
 }
 function mostraVista(n){
   const s=SALAS[sala]; vista=(n+s.vistas.length)%s.vistas.length;
@@ -445,6 +453,15 @@ document.addEventListener("keydown",e=>{
 });
 
 /* página autónoma: arranca de imediato */
-document.body.classList.add("vv-open");
+const intro=$("vvIntro");
+function entra(){
+  if(!intro || intro.classList.contains("fora")) return;
+  intro.classList.add("fora");
+  setTimeout(()=>{ intro.hidden=true; }, 500);
+}
+$("vvComecar").addEventListener("click",entra);
+/* arrastar sobre o cartão também entra */
+intro.addEventListener("pointerdown",e=>{ if(!e.target.closest(".vv-intro__btn")) entra(); });
+document.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" ") entra(); },{once:true});
 arranca();
 })();
