@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="pt-PT" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Museus de Aljezur — protótipo Identity Design</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F5F3ED">
+<script>document.documentElement.classList.replace('no-js','js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<a class="sr-only" href="#conteudo">Saltar para o conteúdo</a>
+
+<header class="site-header" data-header>
+  <div class="site-header__inner">
+    <a class="brand" href="#top"><span class="brand__word">ALJEZUR</span><span class="brand__desc" data-i="brandDesc">Museus · Costa Vicentina</span></a>
+    <nav class="site-nav" aria-label="Principal">
+      <ul>
+        <li><a href="#museus" data-i="nav1">Os museus</a></li>
+        <li><a href="#bilhete" data-i="nav2">Bilhete</a></li>
+        <li><a href="visita.html" data-i="nav4">Visita virtual</a></li>
+        <li><a href="#marcar" data-i="nav3">Marcar visita</a></li>
+      </ul>
+    </nav>
+    <div class="lang">
+      <button id="bpt" class="on" onclick="setLang('pt')">PT</button><span class="sep">/</span><button id="ben" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</header>
+
+<main id="conteudo">
+
+<section class="hero" id="top" data-hero>
+  <div class="hero__stack" id="heroStack"></div>
+  <div class="hero__scrim" aria-hidden="true"></div>
+  <span class="hero__proto" data-i="protoTag">Protótipo · Identity Design</span>
+  <div class="hero__inner container">
+    <div class="hero__content" id="heroContent">
+      <p class="label"><span id="hNum">01</span> / <span data-i="hLabel">Em destaque</span></p>
+      <h1 class="hero__title" id="hTitle">—</h1>
+      <p class="hero__place" id="hPlace">—</p>
+      <p class="hero__tagline" id="hTag">—</p>
+      <p class="hero__facts"><span id="hStatus"></span><span id="hPrice"></span></p>
+      <a class="link-cta link-cta--light hero__cta" href="#museus"><span data-i="hCta">Ver este museu</span> <svg class="arrow" viewBox="0 0 20 12" aria-hidden="true"><path d="M0 6h18M13 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></a>
+    </div>
+    <div class="hero__controls" id="heroDots" role="group"></div>
+  </div>
+</section>
+
+<section class="statusbar">
+  <div class="container statusbar__inner">
+    <div class="statusbar__now">
+      <span class="statusbar__n"><span id="openCount">—</span><span style="font-size:1rem;color:var(--on-dark-2)"> / 7</span></span>
+      <span class="statusbar__lbl"><span data-i="sbLbl">Abertos agora</span> · <span id="nowLine">—</span></span>
+    </div>
+    <ul class="statusbar__list" id="sbList"></ul>
+  </div>
+</section>
+
+<section class="section" id="museus">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="label" data-i="secLbl">Sete espaços · um concelho</p>
+      <h2 class="section-title" data-i="secTitle">Dez mil anos entre a serra e o mar, num único bilhete.</h2>
+      <p class="lede" data-i="secLede">Quatro museus no centro histórico de Aljezur, um na Carrapateira e dois em Odeceixe. O estado de cada espaço é calculado à hora a que está a ler esta página.</p>
+      <div class="filters" id="filters"></div>
+    </div>
+    <div id="zones"></div>
+  </div>
+</section>
+
+<section class="section band" id="bilhete">
+  <div class="container band__grid">
+    <div data-reveal>
+      <p class="label" style="color:var(--on-dark-2)" data-i="bLbl">Bilhete único</p>
+      <h2 class="section-title" style="margin-top:var(--s4)" data-i="bTitle">Um bilhete, quatro museus do centro histórico.</h2>
+      <p data-i="bText">O Museu Municipal, o Museu Antoniano, a Casa-Museu Pintor José Cercas e o Museu de Arte Sacra partilham a mesma entrada, à venda em qualquer um deles. Na Carrapateira o bilhete é próprio. Em Odeceixe, a entrada é livre.</p>
+    </div>
+    <div data-reveal>
+      <div class="band__price">2,20 €</div>
+      <div class="band__u" data-i="bU">Adultos dos 18 aos 65 anos · Carrapateira 2,70 €</div>
+      <ul class="free" id="freeList"></ul>
+    </div>
+  </div>
+</section>
+
+<section class="tour" id="visita">
+  <div class="tour__media"><img src="img/moinho-1300.webp" srcset="img/moinho-760.webp 760w, img/moinho-1300.webp 1300w" sizes="100vw" alt="" loading="lazy" decoding="async"></div>
+  <div class="tour__scrim" aria-hidden="true"></div>
+  <div class="tour__inner">
+    <div class="tour__box" data-reveal>
+      <p class="label" style="color:var(--on-dark-2)" data-i="tLbl">Próxima fase</p>
+      <h2 class="section-title" data-i="tTitle">Percorrer os sete espaços sem sair de casa.</h2>
+      <p class="t" data-i="tText">Uma visita virtual em 360°, sala a sala, com os mesmos textos e horários desta página. Pensada para escolas que preparam a vinda, para quem investiga à distância e para quem decide o roteiro antes de chegar à Costa Vicentina.</p>
+      <p class="note" data-i="tNote">Requer fotografia panorâmica feita no local, espaço a espaço. Fase autónoma, a orçamentar à parte.</p>
+      <a class="link-cta link-cta--light" href="visita.html"><span data-i="tCta">Falar sobre a visita virtual</span> <svg class="arrow" viewBox="0 0 20 12" aria-hidden="true"><path d="M0 6h18M13 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="marcar">
+  <div class="container book__grid">
+    <div data-reveal>
+      <p class="label" data-i="mLbl">Marcação</p>
+      <h2 class="section-title" style="margin-top:var(--s4)" data-i="mTitle">Marcar uma visita.</h2>
+      <p class="lede" style="margin-top:var(--s5)" data-i="mLede">Visitas guiadas, grupos escolares e, de outubro a maio, o Museu Antoniano e a Casa-Museu José Cercas, que nessa época só abrem com marcação.</p>
+      <ol class="steps">
+        <li><strong data-i="s1t">O pedido chega ao serviço certo</strong><span data-i="s1d">Cada espaço tem o seu responsável. O pedido segue para quem trata daquele museu, sem passar por um balcão geral.</span></li>
+        <li><strong data-i="s2t">Resposta em dois dias úteis</strong><span data-i="s2d">Confirmação da data, da hora e do ponto de encontro. As visitas guiadas aos museus do centro histórico começam no Museu Municipal.</span></li>
+        <li><strong data-i="s3t">Grupos e visitas escolares</strong><span data-i="s3d">A dimensão do grupo é combinada consigo antes da visita. No Museu Adega de Odeceixe só podem estar seis pessoas de cada vez no interior.</span></li>
+      </ol>
+    </div>
+    <div data-reveal>
+      <form class="form" id="form" onsubmit="return send(event)">
+        <div class="field"><label class="field__label" for="mu" data-i="lmu">Museu</label><select class="field__input" id="mu" required></select></div>
+        <div class="fieldset two">
+          <div class="field"><label class="field__label" for="dt" data-i="ldt">Data pretendida</label><input class="field__input" type="date" id="dt" required></div>
+          <div class="field"><label class="field__label" for="pp" data-i="lpp">Pessoas</label><input class="field__input" type="number" id="pp" min="1" max="60" value="2" required></div>
+        </div>
+        <div class="fieldset two">
+          <div class="field"><label class="field__label" for="hh" data-i="lhh">Período</label><select class="field__input" id="hh"><option data-i="o1">Manhã</option><option data-i="o2">Tarde</option></select></div>
+          <div class="field"><label class="field__label" for="ln" data-i="lln">Língua da visita</label><select class="field__input" id="ln"><option>Português</option><option>English</option><option>Deutsch</option><option>Français</option></select></div>
+        </div>
+        <div class="field"><label class="field__label" for="nm" data-i="lnm">Nome</label><input class="field__input" type="text" id="nm" required></div>
+        <div class="fieldset two">
+          <div class="field"><label class="field__label" for="em" data-i="lem">E-mail</label><input class="field__input" type="email" id="em" required></div>
+          <div class="field"><label class="field__label" for="tl" data-i="ltl">Telefone</label><input class="field__input" type="tel" id="tl"></div>
+        </div>
+        <div class="field"><label class="field__label" for="ms" data-i="lms">Mensagem</label><textarea class="field__input" id="ms"></textarea></div>
+        <div class="form__foot">
+          <button class="btn btn--primary" type="submit" data-i="lsend">Enviar pedido</button>
+          <span class="form__note" data-i="lhint">Os dados servem apenas para responder a este pedido.</span>
+        </div>
+      </form>
+      <div class="sent" id="sent">
+        <h3 data-i="sentH">Pedido registado</h3>
+        <p data-i="sentP">Receberia agora um e-mail de confirmação, e o pedido seguiria para o serviço responsável por este museu.</p>
+        <div class="m" data-i="sentM">Neste protótipo nada é enviado nem guardado. Na versão final, o destino de cada pedido é definido com o Município.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__grid">
+      <div>
+        <div class="site-footer__word">ALJEZUR</div>
+        <p class="site-footer__demo" data-i="fDemo">Protótipo de demonstração, sem valor oficial, preparado pela Identity Design para apresentação ao Município de Aljezur. Os horários, preços e contactos foram recolhidos nas páginas públicas de cm-aljezur.pt. As imagens são renders de conceito, não fotografias dos espaços reais, e serão substituídas por fotografia do município.</p>
+      </div>
+      <div>
+        <h4 data-i="fh1">Contactos</h4>
+        <ul>
+          <li>Câmara Municipal · 282 990 010</li>
+          <li>ADPHA · 282 991 011</li>
+          <li>Carrapateira · 282 970 000</li>
+          <li>Odeceixe · 282 947 255</li>
+          <li>Misericórdia · 282 998 415</li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i="fh2">Visitar</h4>
+        <ul>
+          <li><a href="#museus" data-i="fl1">Horários e preços</a></li>
+          <li><a href="#bilhete" data-i="fl2">Bilhete único</a></li>
+          <li><a href="#marcar" data-i="fl3">Marcar visita</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__sig">
+      <span data-i="fs1">Identity Design · novembro de 2026</span>
+      <span data-i="fs2">Não é o site oficial do Município de Aljezur</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================ arte ============================ */
+let UID=0;
+const star=(cx,cy,r)=>{let p='';for(let i=0;i<16;i++){const a=(Math.PI*2/16)*i-Math.PI/2,rr=i%2?r*0.46:r;p+=(i?'L':'M')+(cx+Math.cos(a)*rr).toFixed(1)+' '+(cy+Math.sin(a)*rr).toFixed(1)}return p+'Z'};
+const wedge=(cx,cy,r,a0,a1)=>{const x0=cx+Math.cos(a0)*r,y0=cy+Math.sin(a0)*r,x1=cx+Math.cos(a1)*r,y1=cy+Math.sin(a1)*r;
+  return `M${cx} ${cy} L${x0.toFixed(1)} ${y0.toFixed(1)} A${r} ${r} 0 0 1 ${x1.toFixed(1)} ${y1.toFixed(1)} Z`};
+
+function art(kind){
+  const id='a'+(++UID);
+  const P={
+    municipal:['#13332F','#C07A33','#F0D9B0','star'],
+    antoniano:['#43200F','#C2541F','#F2CE9C','arch'],
+    cercas:['#2E1B2B','#A8503C','#EBB98E','brush'],
+    sacra:['#232A1E','#6F7A4E','#DCD6AE','vault'],
+    carrapateira:['#07262F','#1E6E72','#AFD8C8','wave'],
+    adega:['#2C1016','#8E2F38','#E0A074','vine'],
+    moinho:['#1C2730','#4E6B7E','#DCD3B4','mill']
+  }[kind];
+  const [c1,c2,c3,motif]=P;
+  const M={
+    star:`<g>
+      ${[...Array(4)].map((_,r)=>[...Array(5)].map((_,c)=>{
+        const x=c*320-100+(r%2?160:0),y=r*300-110;
+        return `<path d="${star(x,y,170)}" fill="${c3}" opacity="${0.1+((r+c)%3)*0.09}"/>
+                <path d="${star(x,y,78)}" fill="${c1}" opacity=".5"/>`}).join('')).join('')}
+      <rect x="0" y="690" width="1200" height="210" fill="${c1}" opacity=".55"/></g>`,
+    arch:`<g>
+      <rect x="0" y="0" width="1200" height="900" fill="none"/>
+      ${[[-40,470,300],[300,380,330],[700,440,310]].map(([x,y,w],i)=>
+      `<path d="M${x} 900 L${x} ${y} A${w/2} ${w/2} 0 0 1 ${x+w} ${y} L${x+w} 900 Z" fill="${c3}" opacity="${[.2,.3,.16][i]}"/>`).join('')}
+      <path d="M470 900 L470 560 A95 95 0 0 1 660 560 L660 900 Z" fill="${c1}" opacity=".6"/>
+      <rect x="0" y="828" width="1200" height="72" fill="${c1}" opacity=".7"/></g>`,
+    brush:`<g>
+      <rect x="0" y="700" width="1200" height="200" fill="${c1}" opacity=".5"/>
+      <rect x="90" y="250" width="330" height="450" fill="${c3}" opacity=".34"/>
+      <rect x="140" y="300" width="230" height="350" fill="${c1}" opacity=".42"/>
+      <rect x="455" y="140" width="420" height="560" fill="${c3}" opacity=".2"/>
+      <rect x="515" y="200" width="300" height="440" fill="${c1}" opacity=".3"/>
+      <rect x="905" y="330" width="250" height="370" fill="${c3}" opacity=".3" transform="rotate(-5 1030 515)"/>
+      <path d="M560 700 L620 420 L700 560 L760 470 L820 700 Z" fill="${c3}" opacity=".3"/>
+      <circle cx="660" cy="330" r="52" fill="${c3}" opacity=".3"/></g>`,
+    vault:`<g>
+      <rect x="0" y="770" width="1200" height="130" fill="${c1}" opacity=".6"/>
+      <path d="M330 770 L330 390 A270 270 0 0 1 870 390 L870 770 Z" fill="${c3}" opacity=".3"/>
+      <path d="M400 770 L400 410 A200 200 0 0 1 800 410 L800 770 Z" fill="${c1}" opacity=".45"/>
+      <path d="M470 770 L470 430 A130 130 0 0 1 730 430 L730 770 Z" fill="${c3}" opacity=".26"/>
+      <path d="M545 770 L545 450 A55 55 0 0 1 655 450 L655 770 Z" fill="${c1}" opacity=".5"/>
+      <circle cx="600" cy="250" r="78" fill="${c3}" opacity=".3"/>
+      <circle cx="600" cy="250" r="34" fill="${c1}" opacity=".45"/>
+      ${[...Array(8)].map((_,i)=>`<path d="${wedge(600,250,78,(i*Math.PI/4)-0.1,(i*Math.PI/4)+0.1)}" fill="${c1}" opacity=".4"/>`).join('')}</g>`,
+    wave:`<g>
+      ${[[200,.12],[330,.16],[460,.2],[590,.26],[720,.34],[850,.44]].map(([y,o],i)=>
+      `<path d="M-60 ${y} C 240 ${y-70}, 420 ${y+60}, 700 ${y-20} S 1080 ${y-80}, 1280 ${y+10} L1280 900 L-60 900 Z" fill="${c3}" opacity="${o}"/>`).join('')}
+      <circle cx="930" cy="180" r="92" fill="${c3}" opacity=".3"/>
+      <path d="M-60 560 C 240 490, 420 620, 700 540 S 1080 460, 1280 550 L1280 900 L-60 900 Z" fill="${c1}" opacity=".35"/></g>`,
+    vine:`<g>
+      ${[[200,.2],[560,.3],[900,.16]].map(([x,o])=>
+      `<path d="M${x-150} 900 C ${x-205} 520, ${x-80} 340, ${x} 250 C ${x+80} 340, ${x+205} 520, ${x+150} 900 Z" fill="${c3}" opacity="${o}"/>
+       <rect x="${x-46}" y="150" width="92" height="110" fill="${c3}" opacity="${o}"/>`).join('')}
+      <path d="M410 900 C 355 520, 480 340, 560 250 C 640 340, 765 520, 710 900 Z" fill="${c1}" opacity=".4"/>
+      <rect x="0" y="812" width="1200" height="88" fill="${c1}" opacity=".6"/></g>`,
+    mill:`<g>
+      ${[...Array(10)].map((_,i)=>`<path d="${wedge(600,420,980,(i*Math.PI*2/10)-0.16,(i*Math.PI*2/10)+0.16)}" fill="${c3}" opacity="${i%2?.26:.13}"/>`).join('')}
+      <circle cx="600" cy="420" r="128" fill="${c1}" opacity=".62"/>
+      <circle cx="600" cy="420" r="52" fill="${c3}" opacity=".3"/>
+      <rect x="0" y="760" width="1200" height="140" fill="${c1}" opacity=".6"/></g>`
+  }[motif];
+  return `<svg viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="g${id}" x1="0" y1="0" x2=".7" y2="1">
+      <stop offset="0" stop-color="${c2}"/><stop offset="1" stop-color="${c1}"/>
+    </linearGradient>
+    <radialGradient id="r${id}" cx=".74" cy=".2" r=".9">
+      <stop offset="0" stop-color="${c3}" stop-opacity=".4"/><stop offset="1" stop-color="${c3}" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="n${id}"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+  </defs>
+  <rect width="1200" height="900" fill="url(#g${id})"/>
+  <rect width="1200" height="900" fill="url(#r${id})"/>
+  ${M}
+  <rect width="1200" height="900" filter="url(#n${id})" opacity=".26" style="mix-blend-mode:overlay"/>
+</svg>`;
+}
+
+/* ============================ dados ============================ */
+const M=[
+{id:'municipal',zona:'historico',free:false,acess:false,span:'span-7',
+ nome:{pt:'Museu Municipal',en:'Municipal Museum'},
+ curto:{pt:'Museu Municipal',en:'Municipal Museum'},
+ lugar:{pt:'Largo 5 de Outubro, Aljezur',en:'Largo 5 de Outubro, Aljezur'},
+ tag:{pt:'Dez mil anos debaixo do mesmo telhado.',en:'Ten thousand years under one roof.'},
+ d:{pt:'Instalado nos antigos Paços do Concelho, do século XIX. Reúne o núcleo de arqueologia, o núcleo etnográfico e a sala do Legado Andalusino, com cerâmica islâmica recolhida no concelho.',
+    en:'Set in the 19th-century former town hall. It brings together the archaeology collection, the ethnographic rooms and the Andalusian Legacy hall, with Islamic ceramics found across the municipality.'},
+ bilhete:{pt:'Bilhete único · 2,20 €',en:'Combined ticket · €2.20'},
+ tel:'282 991 011 · 282 990 010',
+ aviso:{pt:'O núcleo de arqueologia está encerrado temporariamente devido a obras na casa adjacente.',
+        en:'The archaeology room is temporarily closed owing to building work next door.'},
+ ht:{pt:'Terça a sábado · Maio a setembro 9h–13h e 14h–18h · Outubro a abril 9h–13h e 14h–17h',
+     en:'Tuesday to Saturday · May–Sep 9am–1pm and 2–6pm · Oct–Apr 9am–1pm and 2–5pm'},
+ ep:[{m:[5,6,7,8,9],d:[2,3,4,5,6],j:[[540,780],[840,1080]]},
+     {m:[10,11,12,1,2,3,4],d:[2,3,4,5,6],j:[[540,780],[840,1020]]}]},
+
+{id:'antoniano',zona:'historico',free:false,acess:false,span:'span-5',tall:true,
+ nome:{pt:'Museu Antoniano',en:'St Anthony Museum'},
+ curto:{pt:'Antoniano',en:'St Anthony'},
+ lugar:{pt:'Rua de Santo António, Aljezur',en:'Rua de Santo António, Aljezur'},
+ tag:{pt:'Uma capela que o terramoto não levou por inteiro.',en:'A chapel the earthquake did not take whole.'},
+ d:{pt:'Na antiga capela de Santo António, do século XVII, quase destruída pelo terramoto de 1755 e durante décadas usada como habitação. Guarda arte sacra, sobretudo dos séculos XIX e XX.',
+    en:'In the 17th-century chapel of St Anthony, all but destroyed by the 1755 earthquake and later lived in as a house. It holds sacred art, mostly from the 19th and 20th centuries.'},
+ bilhete:{pt:'Bilhete único · 2,20 €',en:'Combined ticket · €2.20'},
+ tel:'282 991 011 · 282 990 010',
+ ht:{pt:'Junho a setembro · terça a sábado 9h–13h e 14h–18h. De outubro a maio, apenas visitas guiadas marcadas, que começam no Museu Municipal.',
+     en:'June to September · Tuesday to Saturday 9am–1pm and 2–6pm. October to May, booked guided visits only, starting at the Municipal Museum.'},
+ ep:[{m:[6,7,8,9],d:[2,3,4,5,6],j:[[540,780],[840,1080]]},
+     {m:[10,11,12,1,2,3,4,5],marcacao:true}]},
+
+{id:'cercas',zona:'historico',free:false,acess:false,span:'span-5',
+ nome:{pt:'Casa-Museu Pintor José Cercas',en:'José Cercas House Museum'},
+ curto:{pt:'José Cercas',en:'José Cercas'},
+ lugar:{pt:'Rua do Castelo, Aljezur',en:'Rua do Castelo, Aljezur'},
+ tag:{pt:'A casa de um pintor, tal como ele a deixou.',en:'A painter’s house, exactly as he left it.'},
+ d:{pt:'O pintor José Cercas deixou em testamento a casa e todo o espólio ao município. Abriu em 1995 com a disposição que ele próprio concebeu, incluindo a recriação do seu atelier.',
+    en:'The painter José Cercas left his house and everything in it to the municipality. It opened in 1995 arranged exactly as he had planned, his studio recreated.'},
+ bilhete:{pt:'Bilhete único · 2,20 €',en:'Combined ticket · €2.20'},
+ tel:'282 991 011 · 282 990 010',
+ ht:{pt:'Junho a setembro · terça a sábado 9h–13h e 14h–18h. De outubro a maio, apenas visitas guiadas marcadas, que começam no Museu Municipal.',
+     en:'June to September · Tuesday to Saturday 9am–1pm and 2–6pm. October to May, booked guided visits only, starting at the Municipal Museum.'},
+ ep:[{m:[6,7,8,9],d:[2,3,4,5,6],j:[[540,780],[840,1080]]},
+     {m:[10,11,12,1,2,3,4,5],marcacao:true}]},
+
+{id:'sacra',zona:'historico',free:false,acess:false,span:'span-7',fechado:true,
+ nome:{pt:'Museu de Arte Sacra Mons. Manuel Francisco Pardal',en:'Mons. Manuel Francisco Pardal Museum of Sacred Art'},
+ curto:{pt:'Arte Sacra',en:'Sacred Art'},
+ lugar:{pt:'Rua S. João de Deus, Aljezur',en:'Rua S. João de Deus, Aljezur'},
+ tag:{pt:'O antigo hospital da Misericórdia.',en:'The former Misericórdia hospital.'},
+ d:{pt:'No antigo hospital da Misericórdia, de finais do século XVIII. A coleção está organizada segundo o tempo litúrgico e é dedicada ao Monsenhor Manuel Francisco Pardal, natural de Aljezur.',
+    en:'In the late 18th-century former Misericórdia hospital. The collection follows the liturgical year and honours Monsignor Manuel Francisco Pardal, born in Aljezur.'},
+ bilhete:{pt:'Bilhete único · 2,20 €',en:'Combined ticket · €2.20'},
+ tel:'282 998 415',
+ aviso:{pt:'Encerrado por decisão da entidade gestora, a Santa Casa da Misericórdia de Aljezur.',
+        en:'Closed by decision of the managing body, Santa Casa da Misericórdia de Aljezur.'},
+ ht:{pt:'Sem horário em vigor enquanto o museu estiver encerrado.',en:'No opening hours while the museum remains closed.'},
+ ep:[]},
+
+{id:'carrapateira',zona:'carrapateira',free:false,acess:true,span:'span-12',wide:true,
+ nome:{pt:'Museu do Mar e da Terra da Carrapateira',en:'Carrapateira Museum of the Sea and the Land'},
+ curto:{pt:'Carrapateira',en:'Carrapateira'},
+ lugar:{pt:'Rua do Pescador, Carrapateira, Bordeira',en:'Rua do Pescador, Carrapateira, Bordeira'},
+ tag:{pt:'Um museu feito pela aldeia que o habita.',en:'A museum made by the village that lives it.'},
+ d:{pt:'A exposição permanente «O oceano, a nossa terra» conta a vida entre a terra e o mar pela voz da baleia Jonas. A coleção foi reunida pela própria população da aldeia, e o museu tem rampas de acesso e casa de banho adaptada.',
+    en:'The permanent exhibition “The ocean, our land” tells of life between land and sea through the voice of Jonas the whale. The collection was gathered by the village itself, and the museum has access ramps and an adapted washroom.'},
+ bilhete:{pt:'2,70 € · adultos dos 18 aos 65 anos',en:'€2.70 · adults aged 18 to 65'},
+ tel:'282 970 000 · museu-carrapateira@cm-aljezur.pt',
+ ht:{pt:'Segunda a sexta, das 9h às 15h30. Última entrada às 15h.',
+     en:'Monday to Friday, 9am to 3.30pm. Last entry 3pm.'},
+ ep:[{m:[1,2,3,4,5,6,7,8,9,10,11,12],d:[1,2,3,4,5],j:[[540,930]]}]},
+
+{id:'adega',zona:'odeceixe',free:true,acess:false,span:'span-6',
+ nome:{pt:'Museu Adega de Odeceixe',en:'Odeceixe Winery Museum'},
+ curto:{pt:'Adega de Odeceixe',en:'Odeceixe Winery'},
+ lugar:{pt:'Rua Nova, Odeceixe',en:'Rua Nova, Odeceixe'},
+ tag:{pt:'Houve dezassete adegas a trabalhar ao mesmo tempo.',en:'Seventeen wineries once worked here at once.'},
+ d:{pt:'Odeceixe chegou a ter mais de dezassete adegas em funcionamento ao mesmo tempo. O museu reabriu renovado, com projeções e interações que explicam a arte de fazer vinho à maneira antiga.',
+    en:'Odeceixe once had more than seventeen wineries working at the same time. The museum has reopened renewed, with projections and interactive displays on the old way of making wine.'},
+ bilhete:{pt:'Entrada livre',en:'Free entry'},
+ tel:'282 947 255',
+ aviso:{pt:'Visita autónoma, com videovigilância. Só podem estar seis pessoas de cada vez no interior.',
+        en:'Self-guided visit, under video surveillance. Only six people may be inside at a time.'},
+ ht:{pt:'Todos os dias · novembro a fevereiro 9h–17h30 · março a outubro 9h–22h30',
+     en:'Every day · November–February 9am–5.30pm · March–October 9am–10.30pm'},
+ ep:[{m:[11,12,1,2],d:[0,1,2,3,4,5,6],j:[[540,1050]]},
+     {m:[3,4,5,6,7,8,9,10],d:[0,1,2,3,4,5,6],j:[[540,1350]]}]},
+
+{id:'moinho',zona:'odeceixe',free:true,acess:false,span:'span-6',
+ nome:{pt:'Moinho de Odeceixe',en:'Odeceixe Windmill'},
+ curto:{pt:'Moinho de Odeceixe',en:'Odeceixe Windmill'},
+ lugar:{pt:'Serro da Igreja, Odeceixe',en:'Serro da Igreja, Odeceixe'},
+ tag:{pt:'Do alto do serro vê-se a várzea inteira.',en:'From the hilltop the whole floodplain opens up.'},
+ d:{pt:'Restaurado pelo município, mostra todo o processo artesanal de moagem. Do alto do serro vê-se o casario branco da vila, a várzea e a ribeira de Seixe.',
+    en:'Restored by the municipality, it shows the whole craft of milling. From the hilltop you look out over the white village, the floodplain and the Seixe stream.'},
+ bilhete:{pt:'Entrada livre',en:'Free entry'},
+ tel:'282 990 010',
+ ht:{pt:'Junho a setembro, das 10h às 16h30. Encerra domingos, segundas e feriados.',
+     en:'June to September, 10am to 4.30pm. Closed Sundays, Mondays and public holidays.'},
+ ep:[{m:[6,7,8,9],d:[2,3,4,5,6],j:[[600,990]]}]}
+];
+
+const ZONAS={historico:{pt:'Centro histórico de Aljezur',en:'Aljezur historic centre'},
+ carrapateira:{pt:'Carrapateira',en:'Carrapateira'},odeceixe:{pt:'Odeceixe',en:'Odeceixe'}};
+const DESTAQUE=['carrapateira','municipal','adega'];
+const CARDSIZES='(min-width:1024px) 56vw, (min-width:768px) 50vw, 92vw';
+const IMG={
+ municipal:{set:'img/municipal-760.webp 760w, img/municipal-1300.webp 1300w',src:'img/municipal-1300.webp',sizes:CARDSIZES},
+ antoniano:{set:'img/antoniano-580.webp 580w, img/antoniano-950.webp 950w',src:'img/antoniano-950.webp',sizes:'(min-width:768px) 40vw, 92vw'},
+ cercas:{set:'img/cercas-760.webp 760w, img/cercas-1300.webp 1300w',src:'img/cercas-1300.webp',sizes:CARDSIZES},
+ sacra:{set:'img/sacra-760.webp 760w, img/sacra-1300.webp 1300w',src:'img/sacra-1300.webp',sizes:CARDSIZES},
+ carrapateira:{set:'img/carrapateira-1000.webp 1000w, img/carrapateira-1672.webp 1672w',src:'img/carrapateira-1672.webp',sizes:'(min-width:768px) 92vw, 100vw'},
+ adega:{set:'img/adega-760.webp 760w, img/adega-1300.webp 1300w',src:'img/adega-1300.webp',sizes:'(min-width:768px) 48vw, 92vw'},
+ moinho:{set:'img/moinho-760.webp 760w, img/moinho-1300.webp 1300w',src:'img/moinho-1300.webp',sizes:'(min-width:768px) 48vw, 92vw'}
+};
+const HEROIMG={
+ carrapateira:{set:'img/hero-2-1100.webp 1100w, img/hero-2-1672.webp 1672w',src:'img/hero-2-1672.webp'},
+ municipal:{set:'img/hero-1-1100.webp 1100w, img/hero-1-1672.webp 1672w',src:'img/hero-1-1672.webp'},
+ adega:{set:'img/hero-3-1100.webp 1100w, img/hero-3-1672.webp 1672w',src:'img/hero-3-1672.webp'}
+};
+
+const T={
+pt:{brandDesc:'Museus · Costa Vicentina',nav1:'Os museus',nav2:'Bilhete',nav3:'Marcar visita',nav4:'Visita virtual',
+ protoTag:'Protótipo · Identity Design',hLabel:'Em destaque',hCta:'Ver este museu',
+ sbLbl:'Abertos agora',secLbl:'Sete espaços · um concelho',
+ secTitle:'Dez mil anos entre a serra e o mar, num único bilhete.',
+ secLede:'Quatro museus no centro histórico de Aljezur, um na Carrapateira e dois em Odeceixe. O estado de cada espaço é calculado à hora a que está a ler esta página.',
+ bLbl:'Bilhete único',bTitle:'Um bilhete, quatro museus do centro histórico.',
+ bText:'O Museu Municipal, o Museu Antoniano, a Casa-Museu Pintor José Cercas e o Museu de Arte Sacra partilham a mesma entrada, à venda em qualquer um deles. Na Carrapateira o bilhete é próprio. Em Odeceixe, a entrada é livre.',
+ bU:'Adultos dos 18 aos 65 anos · Carrapateira 2,70 €',
+ free:['Menores de 18 anos','Adultos com mais de 65 anos','Estudantes de qualquer nível de ensino, mediante comprovativo','Professores em exercício de funções','Profissionais de museus (ICOM, MINOM, APOM) identificados','Pessoas com deficiência superior a 60%, legalmente comprovada'],
+ tLbl:'Disponível agora',tTitle:'Percorrer o Museu Municipal sem sair de casa.',
+ tText:'Uma visita virtual em 360° às três salas do Museu Municipal: o núcleo de arqueologia, o núcleo etnográfico e a sala do Legado Andalusino. Gira dentro de cada sala, toca nos pontos e lê sobre vinte e duas peças. Pensada para escolas que preparam a vinda, para quem investiga à distância e para quem decide o roteiro antes de chegar à Costa Vicentina.',
+ tNote:'Protótipo com imagens de síntese, não fotografia do espaço real. Os restantes seis espaços exigem captação panorâmica no local, a orçamentar à parte.',
+ tCta:'Entrar na visita virtual',
+ mLbl:'Marcação',mTitle:'Marcar uma visita.',
+ mLede:'Visitas guiadas, grupos escolares e, de outubro a maio, o Museu Antoniano e a Casa-Museu José Cercas, que nessa época só abrem com marcação.',
+ s1t:'O pedido chega ao serviço certo',s1d:'Cada espaço tem o seu responsável. O pedido segue para quem trata daquele museu, sem passar por um balcão geral.',
+ s2t:'Resposta em dois dias úteis',s2d:'Confirmação da data, da hora e do ponto de encontro. As visitas guiadas aos museus do centro histórico começam no Museu Municipal.',
+ s3t:'Grupos e visitas escolares',s3d:'A dimensão do grupo é combinada consigo antes da visita. No Museu Adega de Odeceixe só podem estar seis pessoas de cada vez no interior.',
+ lmu:'Museu',ldt:'Data pretendida',lpp:'Pessoas',lhh:'Período',o1:'Manhã',o2:'Tarde',lln:'Língua da visita',lnm:'Nome',lem:'E-mail',ltl:'Telefone',lms:'Mensagem',lsend:'Enviar pedido',
+ lhint:'Os dados servem apenas para responder a este pedido.',
+ sentH:'Pedido registado',sentP:'Receberia agora um e-mail de confirmação, e o pedido seguiria para o serviço responsável por este museu.',
+ sentM:'Neste protótipo nada é enviado nem guardado. Na versão final, o destino de cada pedido é definido com o Município.',
+ fDemo:'Protótipo de demonstração, sem valor oficial, preparado pela Identity Design para apresentação ao Município de Aljezur. Os horários, preços e contactos foram recolhidos nas páginas públicas de cm-aljezur.pt. As imagens são renders de conceito, não fotografias dos espaços reais, e serão substituídas por fotografia do município.',
+ fh1:'Contactos',fh2:'Visitar',fl1:'Horários e preços',fl2:'Bilhete único',fl3:'Marcar visita',
+ fs1:'Identity Design · novembro de 2026',fs2:'Não é o site oficial do Município de Aljezur',
+ fTodos:'Todos',fAbertos:'Abertos agora',fLivre:'Entrada livre',fAcess:'Acessível',
+ rHorario:'Horário',rMorada:'Morada',rContacto:'Contacto',
+ aberto:'Aberto agora',fecha:'fecha às',fechado:'Fechado',encerrado:'Encerrado',marcacao:'Só com marcação',epoca:'Fechado nesta época',
+ abre:'abre',hoje:'hoje',amanha:'amanhã',as:'às',semPrevisao:'sem data de reabertura',
+ verMais:'Marcar visita',imagem:'Render de conceito',
+ ndias:['domingo','segunda','terça','quarta','quinta','sexta','sábado']},
+en:{brandDesc:'Museums · Vicentine Coast',nav1:'The museums',nav2:'Ticket',nav3:'Book a visit',nav4:'Virtual visit',
+ protoTag:'Prototype · Identity Design',hLabel:'Featured',hCta:'See this museum',
+ sbLbl:'Open now',secLbl:'Seven sites · one municipality',
+ secTitle:'Ten thousand years between the hills and the sea, on a single ticket.',
+ secLede:'Four museums in the historic centre of Aljezur, one in Carrapateira and two in Odeceixe. Each status is worked out for the moment you are reading this page.',
+ bLbl:'Combined ticket',bTitle:'One ticket, four museums in the historic centre.',
+ bText:'The Municipal Museum, the St Anthony Museum, the José Cercas House Museum and the Museum of Sacred Art share one entry, sold at any of them. Carrapateira has its own ticket. In Odeceixe, entry is free.',
+ bU:'Adults aged 18 to 65 · Carrapateira €2.70',
+ free:['Under 18','Over 65','Students at any level, on presentation of proof','Teachers currently in service','Museum professionals (ICOM, MINOM, APOM) with identification','People with a certified disability above 60%'],
+ tLbl:'Available now',tTitle:'Walk through the Municipal Museum without leaving home.',
+ tText:'A 360° virtual visit to the three rooms of the Municipal Museum: archaeology, ethnography and the Andalusian Legacy hall. Turn around inside each room, tap the markers and read about twenty-two objects. The tour itself is in Portuguese for now.',
+ tNote:'A prototype built on synthetic imagery, not photographs of the real rooms. The other six spaces need panoramic photography shot on site, quoted separately.',
+ tCta:'Enter the virtual visit',
+ mLbl:'Booking',mTitle:'Book a visit.',
+ mLede:'Guided visits, school groups, and — from October to May — the St Anthony Museum and the José Cercas House Museum, which in that season open by appointment only.',
+ s1t:'The request reaches the right service',s1d:'Each site has its own keeper. The request goes to whoever looks after that museum, not to a general desk.',
+ s2t:'An answer within two working days',s2d:'Confirming the date, the time and the meeting point. Guided visits to the historic-centre museums begin at the Municipal Museum.',
+ s3t:'Groups and school visits',s3d:'Group size is agreed with you before the visit. At the Odeceixe Winery Museum only six people may be inside at a time.',
+ lmu:'Museum',ldt:'Preferred date',lpp:'People',lhh:'Time of day',o1:'Morning',o2:'Afternoon',lln:'Language',lnm:'Name',lem:'E-mail',ltl:'Phone',lms:'Message',lsend:'Send request',
+ lhint:'Your details are used only to answer this request.',
+ sentH:'Request recorded',sentP:'You would now receive a confirmation e-mail, and the request would go to the service responsible for this museum.',
+ sentM:'Nothing is sent or stored in this prototype. In the final version, where each request goes is agreed with the Municipality.',
+ fDemo:'Demonstration prototype, with no official standing, prepared by Identity Design to present to the Municipality of Aljezur. Hours, prices and contacts were gathered from the public pages of cm-aljezur.pt. The imagery consists of concept renders, not photographs of the actual spaces, and will be replaced by the municipality’s own photography.',
+ fh1:'Contact',fh2:'Visit',fl1:'Hours and prices',fl2:'Combined ticket',fl3:'Book a visit',
+ fs1:'Identity Design · November 2026',fs2:'Not the official site of the Municipality of Aljezur',
+ fTodos:'All',fAbertos:'Open now',fLivre:'Free entry',fAcess:'Accessible',
+ rHorario:'Hours',rMorada:'Address',rContacto:'Contact',
+ aberto:'Open now',fecha:'closes at',fechado:'Closed',encerrado:'Closed',marcacao:'By appointment',epoca:'Closed this season',
+ abre:'opens',hoje:'today',amanha:'tomorrow',as:'at',semPrevisao:'no reopening date',
+ verMais:'Book a visit',imagem:'Concept render',
+ ndias:['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']}
+};
+
+let LANG='pt',FILTER='todos',HERO=0;
+
+/* ============================ tempo ============================ */
+function agora(){
+  const f=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Lisbon',year:'numeric',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit',weekday:'short',hourCycle:'h23'});
+  const p={};f.formatToParts(new Date()).forEach(x=>p[x.type]=x.value);
+  const W={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};
+  return{y:+p.year,mo:+p.month,da:+p.day,wd:W[p.weekday],min:(+p.hour)*60+(+p.minute),hh:p.hour,mm:p.minute};
+}
+const hm=v=>String(Math.floor(v/60)).padStart(2,'0')+'h'+(v%60?String(v%60).padStart(2,'0'):'');
+const ep=(m,mo)=>m.ep.find(e=>e.m.includes(mo))||null;
+
+function estado(m,n){
+  const t=T[LANG];
+  if(m.fechado) return{k:'c',txt:t.encerrado,sub:t.semPrevisao};
+  const e=ep(m,n.mo);
+  if(e&&!e.marcacao&&e.d.includes(n.wd))
+    for(const[a,b]of e.j) if(n.min>=a&&n.min<b) return{k:'o',txt:t.aberto,sub:`${t.fecha} ${hm(b)}`};
+  if(e&&e.marcacao) return{k:'a',txt:t.marcacao,sub:''};
+  for(let d=0;d<=14;d++){
+    const dt=new Date(Date.UTC(n.y,n.mo-1,n.da+d,12,0,0));
+    const mo=dt.getUTCMonth()+1,wd=dt.getUTCDay(),se=ep(m,mo);
+    if(!se) continue;
+    if(se.marcacao){if(d===0)continue;return{k:'a',txt:t.marcacao,sub:''}}
+    if(!se.d.includes(wd)) continue;
+    for(const[a]of se.j){
+      if(d===0&&n.min>=a) continue;
+      const q=d===0?t.hoje:d===1?t.amanha:t.ndias[wd];
+      return{k:'c',txt:t.fechado,sub:`${t.abre} ${q} ${t.as} ${hm(a)}`};
+    }
+  }
+  return{k:'c',txt:t.epoca,sub:''};
+}
+const pill=s=>`<span class="dot ${s.k}"><i></i>${s.txt}${s.sub?' · '+s.sub:''}</span>`;
+
+/* ============================ render ============================ */
+function render(){
+  const t=T[LANG],n=agora();
+  document.documentElement.lang=LANG==='pt'?'pt-PT':'en';
+  document.querySelectorAll('[data-i]').forEach(el=>{const k=el.dataset.i;if(typeof t[k]==='string')el.innerHTML=t[k]});
+  bpt.className=LANG==='pt'?'on':'';ben.className=LANG==='en'?'on':'';
+
+  const est=M.map(m=>({m,s:estado(m,n)}));
+
+  openCount.textContent=est.filter(x=>x.s.k==='o').length;
+  nowLine.textContent=`${t.ndias[n.wd]}, ${n.hh}:${n.mm}`;
+  sbList.innerHTML=est.map(x=>{
+    const c=x.s.k==='o'?'#7FC79B':x.s.k==='a'?'#E6C07A':'#E09184';
+    return `<li data-m="${x.m.id}"><i style="background:${c}"></i>${x.m.curto[LANG]}</li>`}).join('');
+
+  freeList.innerHTML=t.free.map(f=>`<li>${f}</li>`).join('');
+
+  const fs=[['todos',t.fTodos],['abertos',t.fAbertos],['livre',t.fLivre],['acess',t.fAcess]];
+  filters.innerHTML=fs.map(([k,l])=>`<button class="chip ${FILTER===k?'on':''}" onclick="setFilter('${k}')">${l}</button>`).join('');
+
+  let html='';
+  for(const z of['historico','carrapateira','odeceixe']){
+    const lista=est.filter(x=>x.m.zona===z&&passa(x));
+    if(!lista.length) continue;
+    html+=`<div class="zone-head" data-reveal><p class="label">${ZONAS[z][LANG]}</p><span class="rule"></span></div>
+    <div class="selection__grid">${lista.map(({m,s})=>card(m,s,t)).join('')}</div>`;
+  }
+  zones.innerHTML=html||'';
+
+  mu.innerHTML=est.map(({m})=>`<option value="${m.id}" ${m.fechado?'disabled':''}>${m.nome[LANG]}${m.fechado?' — '+t.encerrado:''}</option>`).join('');
+
+  renderHero(est,t);
+  armReveal();
+}
+const passa=x=>FILTER==='todos'||(FILTER==='abertos'&&x.s.k==='o')||(FILTER==='livre'&&x.m.free)||(FILTER==='acess'&&x.m.acess);
+
+function card(m,s,t){
+  return `<article class="${m.span} card ${m.tall?'card--tall':''} ${m.wide?'card--wide':''}" data-reveal>
+    <div class="card__link">
+      <div class="card__media">${art(m.id)}<img src="${IMG[m.id].src}" srcset="${IMG[m.id].set}" sizes="${IMG[m.id].sizes}" alt="" loading="lazy" decoding="async" onload="this.classList.add('ok')" onerror="this.remove()"><span class="ph">${t.imagem}</span></div>
+      <div class="card__body">
+        <h3 class="card__title">${m.nome[LANG]}</h3>
+        <p class="card__place">${m.lugar[LANG]}</p>
+        <p class="card__desc">${m.d[LANG]}</p>
+        ${m.aviso?`<p class="card__note">${m.aviso[LANG]}</p>`:''}
+        <dl class="card__rows">
+          <div class="card__row"><dt>${t.rHorario}</dt><dd>${m.ht[LANG]}</dd></div>
+          <div class="card__row"><dt>${t.rContacto}</dt><dd>${m.tel}</dd></div>
+        </dl>
+        <div class="card__strip"><span class="js-pill" data-m="${m.id}">${pill(s)}</span><span class="card__price">${m.bilhete[LANG]}</span></div>
+      </div>
+    </div>
+  </article>`;
+}
+
+function renderHero(est,t){
+  const items=DESTAQUE.map(id=>est.find(x=>x.m.id===id));
+  if(!heroStack.children.length){
+    heroStack.innerHTML=items.map((x,i)=>`<div class="hero__layer ${i===0?'is-active':''}" data-layer="${i}">${art(x.m.id)}<img src="${HEROIMG[x.m.id].src}" srcset="${HEROIMG[x.m.id].set}" sizes="100vw" alt="" ${i?'loading="lazy"':'fetchpriority="high"'} decoding="async" onerror="this.remove()"></div>`).join('');
+    heroDots.innerHTML=items.map((x,i)=>`<button class="hero__dot" type="button" aria-pressed="${i===0}" onclick="goHero(${i})"><span class="hero__dot-num">0${i+1}</span><span class="hero__dot-name">${x.m.curto[LANG]}</span></button>`).join('');
+  }else{
+    [...heroDots.children].forEach((b,i)=>b.querySelector('.hero__dot-name').textContent=items[i].m.curto[LANG]);
+  }
+  heroText();
+}
+function heroText(){
+  const n=agora(),t=T[LANG];
+  const x=DESTAQUE.map(id=>M.find(m=>m.id===id))[HERO];
+  hNum.textContent='0'+(HERO+1);
+  hTitle.textContent=x.nome[LANG];
+  hPlace.textContent=x.lugar[LANG];
+  hTag.textContent=x.tag[LANG];
+  hStatus.innerHTML=pill(estado(x,n));
+  hPrice.textContent=x.bilhete[LANG];
+}
+function refreshStatus(){
+  const n=agora(),t=T[LANG];
+  const est=M.map(m=>({m,s:estado(m,n)}));
+  openCount.textContent=est.filter(x=>x.s.k==='o').length;
+  nowLine.textContent=`${t.ndias[n.wd]}, ${n.hh}:${n.mm}`;
+  est.forEach(({m,s})=>{
+    const c=s.k==='o'?'#7FC79B':s.k==='a'?'#E6C07A':'#E09184';
+    const li=sbList.querySelector(`li[data-m="${m.id}"] i`); if(li) li.style.background=c;
+    const pl=document.querySelector(`.js-pill[data-m="${m.id}"]`); if(pl) pl.innerHTML=pill(s);
+  });
+  heroText();
+}
+function goHero(i){
+  HERO=i;
+  [...heroStack.children].forEach((l,k)=>l.classList.toggle('is-active',k===i));
+  [...heroDots.children].forEach((b,k)=>b.setAttribute('aria-pressed',k===i));
+  heroContent.classList.add('is-swapping');
+  setTimeout(()=>{heroText();heroContent.classList.remove('is-swapping')},180);
+}
+
+function setLang(l){LANG=l;render()}
+function setFilter(f){FILTER=f;render()}
+function send(e){e.preventDefault();form.style.display='none';sent.style.display='block';sent.scrollIntoView({block:'center'});return false}
+
+/* ---- scroll / reveal ---- */
+const hdr=document.querySelector('[data-header]');
+const softMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let ticking=false;
+function onScroll(){
+  hdr.classList.toggle('is-solid',scrollY>innerHeight*0.82);
+  if(softMotion||ticking) return;
+  ticking=true;
+  requestAnimationFrame(()=>{
+    const vh=innerHeight;
+    const tm=document.querySelector('.tour');
+    if(tm){const r=tm.getBoundingClientRect();
+      if(r.bottom>-200&&r.top<vh+200){const p=(r.top+r.height/2-vh/2)/vh;tm.style.setProperty('--tpar',(p*-40).toFixed(1)+'px')}}
+    document.querySelectorAll('.card__media').forEach(el=>{
+      const r=el.getBoundingClientRect();
+      if(r.bottom<-200||r.top>vh+200) return;
+      const p=(r.top+r.height/2-vh/2)/vh;
+      el.style.setProperty('--par',(p*-26).toFixed(1)+'px');
+    });
+    ticking=false;
+  });
+}
+addEventListener('scroll',onScroll,{passive:true});
+addEventListener('resize',onScroll,{passive:true});
+let io;
+function armReveal(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.documentElement.classList.add('reveal-ready');
+  io=io||new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8%'});
+  document.querySelectorAll('[data-reveal]:not(.is-in)').forEach(el=>io.observe(el));
+}
+
+render();
+onScroll();
+setInterval(refreshStatus,60000);
+setInterval(()=>goHero((HERO+1)%3),8000);
+dt.value=new Date(Date.now()+3*864e5).toISOString().slice(0,10);
+</script>
+
+</body>
+</html>
